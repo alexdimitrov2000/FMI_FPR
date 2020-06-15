@@ -8,11 +8,8 @@ main = do
     
     print ("Task 02")
     print (removeNb 26)
-    print (removeS 26)
     print (removeNb 100)
-    print (removeS 100)
     print (removeNb 101)
-    print (removeS 101)
 
     print ("Task 03")
     print (onDiag (5.5, 5.5))
@@ -28,7 +25,7 @@ sumNumbers :: Int -> Int -> Int -> Int
 sumNumbers n a b = sum [x | x <- [1..n], x /= a, x /= b]
 
 removeNb :: Int -> [(Int, Int)]
-removeNb n = [(a, b) | a <- [1..n], b <- [1..n], a * b == sumNumbers n a b]\
+removeNb n = [(a, b) | a <- [1..n], b <- [1..n], a * b == sumNumbers n a b]
 
 -- Task 03
 type Point = (Double, Double)

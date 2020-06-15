@@ -1,3 +1,5 @@
+import Data.List
+
 main :: IO()
 main = do
     print (isInterestingNum 410)
@@ -30,15 +32,27 @@ progressions lss = [es | es <- lss, isProgression es]
 -- Task 05
 dominates :: (Int -> Int) -> (Int -> Int) -> [Int] -> Bool
 dominates f g [] = True
-dominates f g (x:xs) = abs (f x) => abs (g x) && dominates f g xs
+dominates f g (x:xs) = abs (f x) >= abs (g x) && dominates f g xs
 
 -- Task 06
 type Student = String
 type Subject = String
-type Note = Double
+type Grade = Double
 
-type Record = (Student, Subject, Note)
+type Record = (Student, Subject, Grade)
 
--- hardestSubject :: [Record] -> Subject
--- hardestSubject [(st,su,n)] = getSubj
---     where
+records :: [Record]
+records = [("Pesho", "History", 4.20), ("Gosho", "History", 4), ("Pesho", "Maths", 6)]
+
+getSubject :: Record -> Subject
+getSubject (_, sub, _) = sub
+
+hardestSubject :: [Record] -> Subject
+hardestSubject rs = fst lowestAvgGrade
+    where
+        subjects = nub [getSubject r | r <- rs]
+        grades = [(subj, [grade | (_, subjName, grade) <- rs, subjName == subj]) | subj <- subjects]
+        average gs = sum gs / fromIntegral (length gs)
+        avgGrades = [(subj, average gds) | (subj, gds) <- grades]
+        lowest g1@(_, a1) g2@(_, a2) = if (a1 <= a2) then g1 else g2
+        lowestAvgGrade = foldl1 lowest avgGrades

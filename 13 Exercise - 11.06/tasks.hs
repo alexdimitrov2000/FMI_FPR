@@ -26,7 +26,7 @@ allHaveTwoChildren ts = and [length vs == 2 | (_, vs) <- ts]
 -- Task 03
 t3 = [(1,[2,3,4]),(2,[5,6]),(3,[7]),(4,[8,9]),(5,[]),(6,[10]),(7,[]),(8,[]),(9,[]),(10,[])]
 
-findUncles :: [(Int, [Int])] -> Int -> [Int] 978
+findUncles :: [(Int, [Int])] -> Int -> [Int]
 findUncles ts v
     | parent == [] = []
     | otherwise = brothers (head parent)
